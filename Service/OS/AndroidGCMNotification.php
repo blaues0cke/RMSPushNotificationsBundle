@@ -66,12 +66,12 @@ class AndroidGCMNotification implements OSNotificationServiceInterface
     /**
      * Constructor
      *
-     * @param string       $apiKey
-     * @param bool         $useMultiCurl
-     * @param int          $timeout
+     * @param string $apiKey
+     * @param bool $useMultiCurl
+     * @param int $timeout
      * @param LoggerInterface $logger
      * @param AbstractCurl $client (optional)
-     * @param bool         $dryRun
+     * @param bool $dryRun
      */
     public function __construct($apiKey, $useMultiCurl, $timeout, $logger, AbstractCurl $client = null, $dryRun = false)
     {
@@ -88,9 +88,17 @@ class AndroidGCMNotification implements OSNotificationServiceInterface
     }
 
     /**
+     * @param string $apiKey
+     */
+    public function setApiKey(string $apiKey)
+    {
+        $this->apiKey = $apiKey;
+    }
+
+    /**
      * Sends the data to the given registration IDs via the GCM server
      *
-     * @param  \RMS\PushNotificationsBundle\Message\MessageInterface              $message
+     * @param  \RMS\PushNotificationsBundle\Message\MessageInterface $message
      * @throws \RMS\PushNotificationsBundle\Exception\InvalidMessageTypeException
      * @return bool
      */

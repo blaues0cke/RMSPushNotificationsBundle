@@ -4,6 +4,7 @@ namespace RMS\PushNotificationsBundle\Service;
 
 use RMS\PushNotificationsBundle\Device\Types;
 use RMS\PushNotificationsBundle\Message\MessageInterface;
+use RMS\PushNotificationsBundle\Service\OS\AndroidGCMNotification;
 use RMS\PushNotificationsBundle\Service\OS\AppleNotification;
 
 class Notifications
@@ -92,11 +93,24 @@ class Notifications
      * @param $pemContent string
      * @param $passphrase
      */
-    public function setAPNSPemAsString($pemContent, $passphrase) {
+    public function setAPNSPemAsString($pemContent, $passphrase)
+    {
         if (isset($this->handlers[Types::OS_IOS]) && $this->handlers[Types::OS_IOS] instanceof AppleNotification) {
             /** @var AppleNotification $appleNotification */
             $appleNotification = $this->handlers[Types::OS_IOS];
             $appleNotification->setPemAsString($pemContent, $passphrase);
+        }
+    }
+
+    /**
+     * @param $apiKey
+     */
+    public function setGcmApiKey($apiKey)
+    {
+        if (isset($this->handlers[Types::OS_ANDROID_GCM]) && $this->handlers[Types::OS_ANDROID_GCM] instanceof AndroidGCMNotification) {
+            /** @var AndroidGCMNotification $androidNotification */
+            $androidNotification = $this->handlers[Types::OS_ANDROID_GCM];
+            $androidNotification->setApiKey($apiKey);
         }
     }
 }
